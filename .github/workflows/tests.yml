@@ -1,0 +1,38 @@
+name: Run tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  phpunit-9:
+    name: Test on PHPUnit 9
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+
+      - uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: highest
+
+      - run: vendor/bin/phpunit -c phpunit-9.xml
+
+  phpunit-10:
+    name: Test on PHPUnit 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+
+      - uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: highest
+
+      - run: vendor/bin/phpunit -c phpunit-10.xml
